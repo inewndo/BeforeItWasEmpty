@@ -10,6 +10,7 @@ public class CCPlayer : MonoBehaviour
     private CharacterController cc;
     public float walkSpeed = 3;
     private Vector2 moveInput;
+    private float verticalVelocity;
 
 
     [Header("Camera")]
@@ -34,6 +35,12 @@ public class CCPlayer : MonoBehaviour
         reticleImage.color = new Color(r: 0, g: 0, b: 0, a: 7f);
     }
 
+    private void Update()
+    {
+        HandleLook();
+        HandleMovement();
+    }
+
     private void HandleLook()
     {
         float yaw = lookInput.x * lookSensativity;
@@ -46,9 +53,16 @@ public class CCPlayer : MonoBehaviour
 
     private void HandleMovement()
     {
+        bool grounded = cc.isGrounded;
+        if(grounded && verticalVelocity <= 0)
+        {
+            verticalVelocity = -2f;
+        }
         float currentSpeed = walkSpeed;
-        Vector3 move = transform.right * moveInput.x * currentSpeed;
-        cc.Move(motion: (move) * Time.deltaTime);
+        Vector3 move = transform.right * moveInput.x * currentSpeed + transform.forward * moveInput.y * currentSpeed;
+        
+        Vector3 velocity = Vector3.up * verticalVelocity;
+        cc.Move(motion: (move + velocity) * Time.deltaTime);
     }
 
     public void OnMove(InputAction.CallbackContext context)
