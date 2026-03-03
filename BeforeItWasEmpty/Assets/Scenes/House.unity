@@ -630,6 +630,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 452728749}
   lookSensativity: 1
   reticleImage: {fileID: 47626369}
+  interactPressed: 0
   PiecesCollectedText: {fileID: 719099619}
 --- !u!143 &188470386
 CharacterController:
@@ -1843,7 +1844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4108208372584027584, guid: 1a7685cad0e05464d9b1209ae3d279a0, type: 3}
       propertyPath: m_TagString
-      value: Interactable
+      value: PuzzlePiece
       objectReference: {fileID: 0}
     - target: {fileID: 7638785255055862944, guid: 1a7685cad0e05464d9b1209ae3d279a0, type: 3}
       propertyPath: m_LocalScale.x
@@ -3357,7 +3358,7 @@ GameObject:
   - component: {fileID: 1670746985}
   - component: {fileID: 1670746989}
   m_Layer: 0
-  m_Name: Book
+  m_Name: Box
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3450,7 +3451,7 @@ Transform:
   m_GameObject: {fileID: 1670746984}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.28, y: 1.51, z: 8.87}
+  m_LocalPosition: {x: -7.67, y: 1.51, z: 3.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3465,9 +3466,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1670746984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2430e1d82340e4c4791d41ab6e8b20b3, type: 3}
+  m_Script: {fileID: 11500000, guid: e135443e5af7a934292170524714080e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Destroyobject
+  m_EditorClassIdentifier: Assembly-CSharp::PuzzleBox
 --- !u!4 &1765940450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7638785255055862944, guid: 1a7685cad0e05464d9b1209ae3d279a0, type: 3}
@@ -3572,13 +3573,13 @@ MonoBehaviour:
     allowed the press to blow the incident out of proportion, with the bad press
     lingering even after a new restaurant was opened shortly after.[1]
 
-    
+
 
     The
     incident contributed to a loss in the company''s reputation, which was one of
     the numerous incidents that resulted in a major drop in business going forward.
 
-    
+
 
     As
     a result of the incident, the animatronics were no longer allowed to wander around
