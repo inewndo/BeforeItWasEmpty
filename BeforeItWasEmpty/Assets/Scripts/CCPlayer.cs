@@ -25,7 +25,7 @@ public class CCPlayer : MonoBehaviour
     [Header("Interactable")]
     private GameObject currrentTarget; 
     public Image reticleImage;
-    private bool interactPressed;
+    public bool interactPressed;
     private Interactable currentInteractable;
 
     [Header("Puzzle")]
@@ -41,8 +41,8 @@ public class CCPlayer : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
 
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         reticleImage = GameObject.Find("Reticle").GetComponent<Image>();
         reticleImage.color = new Color(r: 0, g: 0, b: 0, a: 7f); 
