@@ -26,6 +26,7 @@ public class CCPlayer : MonoBehaviour
     private GameObject currrentTarget; 
     public Image reticleImage;
     private bool interactPressed;
+    private Interactable currentInteractable;
 
     [Header("Puzzle")]
     private int PuzzlePiece = 0;
@@ -56,8 +57,8 @@ public class CCPlayer : MonoBehaviour
     {
         HandleLook();
         HandleMovement();
-        //CheckInteract();
-        //HandleInteract();
+        CheckInteract();
+        HandleInteract();
     }
 
     #region HANDLES
@@ -90,34 +91,33 @@ public class CCPlayer : MonoBehaviour
     }
     #endregion 
 
-    //void CheckInteract()
-    //{
-    //    if (reticleImage != null) reticleImage.color = new Color(0, 0, 0, .7f);
-    //    Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+    void CheckInteract()
+    {
+        if (reticleImage != null) reticleImage.color = new Color(0, 0, 0, .7f);
+        Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
 
-    //    if (Physics.Raycast(ray, out RaycastHit hit, 3f))
-    //    {
-    //        currrentInteractable = hit.collider.GetComponent<Interactable>();
-    //        if (currrentInteractable != null && reticleImage != null)
-    //        {
-    //            reticleImage.color = Color.red;
-    //            Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 3, Color.blue);
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+        {
+            currentInteractable = hit.collider.GetComponent<Interactable>();
+            if (currentInteractable != null && reticleImage != null)
+            {
+                reticleImage.color = Color.red;
+                Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 3, Color.blue);
 
-    //        }
-    //        else
-    //        {
-    //            Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 3, Color.blue);
-    //        }
-    //    }
-
-
-    //}
-    //void HandleInteract()
-    //{
-    //    interactPressed = false;
-    //    if (currrentInteractable == null) return;
-    //    currrentInteractable.Interact(this);
-    //}
+            }
+            else
+            {
+                Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 3, Color.blue);
+            }
+        }
+    }
+    void HandleInteract()
+    {
+        if (!interactPressed) return;
+        interactPressed = false;
+        if (currentInteractable == null) return;
+        currentInteractable.Interact(this);
+    }
 
     #region PLAYERINPUT
     public void OnMove(InputAction.CallbackContext context)

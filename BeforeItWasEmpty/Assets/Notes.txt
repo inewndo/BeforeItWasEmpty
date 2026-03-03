@@ -13,3 +13,5 @@
 Puzzle pieces have small hints for where to look for the next one
 Inventory?
 object triggers which tell pieces of story (subtle hints for puzzle pieces)
+
+create emptys in puzzle spots, piece snaps to it with approximation, turn to true - when all true = game complete or smth
