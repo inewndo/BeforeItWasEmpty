@@ -1,0 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
+Puzzle pieces have small hints for where to look for the next one
+Inventory?
+object triggers which tell pieces of story (subtle hints for puzzle pieces)

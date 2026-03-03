@@ -1,3 +1,7 @@
+using System;
+using System.Xml.Linq;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -5,22 +9,30 @@ using UnityEngine.UI;
 public class CCPlayer : MonoBehaviour
 {
     #region VARIABLES
-
     [Header("Movement")]
+    public float walkSpeed = 5;
     private CharacterController cc;
-    public float walkSpeed = 3;
     private Vector2 moveInput;
-    private float verticalVelocity;
-
+    private float verticalVelocity; 
+    private float gravity = -20f; 
 
     [Header("Camera")]
-    private Vector2 lookInput;
     public Transform cameraTransform;
-    public float lookSensativity;
-    private float pitch;
+    public float lookSensativity = 1f;
+    private Vector2 lookInput;
+    private float pitch; 
 
-    [Header("Interactables")]
+    [Header("Interactable")]
+    private GameObject currrentTarget; 
     public Image reticleImage;
+    private bool interactPressed;
+
+    [Header("Puzzle")]
+    private int PuzzlePiece = 0;
+    public TextMeshProUGUI PiecesCollectedText;
+
+    
+    
 
     #endregion
 
@@ -28,43 +40,86 @@ public class CCPlayer : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
         reticleImage = GameObject.Find("Reticle").GetComponent<Image>();
-        reticleImage.color = new Color(r: 0, g: 0, b: 0, a: 7f);
+        reticleImage.color = new Color(r: 0, g: 0, b: 0, a: 7f); 
     }
 
-    private void Update()
+    void Start()
+    {
+
+    }
+
+    void Update()
     {
         HandleLook();
         HandleMovement();
+        //CheckInteract();
+        //HandleInteract();
     }
 
+    #region HANDLES
     private void HandleLook()
     {
         float yaw = lookInput.x * lookSensativity;
         float pitchDelta = lookInput.y * lookSensativity;
+
         transform.Rotate(eulers: Vector3.up * yaw);
+
         pitch -= pitchDelta;
         pitch = Mathf.Clamp(pitch, min: -90, max: 90);
         cameraTransform.localRotation = Quaternion.Euler(pitch, 0, 0);
     }
-
     private void HandleMovement()
     {
         bool grounded = cc.isGrounded;
-        if(grounded && verticalVelocity <= 0)
+       
+        if (grounded && verticalVelocity <= 0)
         {
             verticalVelocity = -2f;
         }
-        float currentSpeed = walkSpeed;
-        Vector3 move = transform.right * moveInput.x * currentSpeed + transform.forward * moveInput.y * currentSpeed;
-        
-        Vector3 velocity = Vector3.up * verticalVelocity;
-        cc.Move(motion: (move + velocity) * Time.deltaTime);
-    }
 
+        float currentSpeed = walkSpeed;
+
+        Vector3 move = transform.right * moveInput.x * currentSpeed + transform.forward * moveInput.y * currentSpeed;
+        verticalVelocity += gravity * Time.deltaTime;
+        Vector3 velocity = Vector3.up * verticalVelocity;
+        cc.Move(motion: (move + velocity) * Time.deltaTime); 
+    }
+    #endregion 
+
+    //void CheckInteract()
+    //{
+    //    if (reticleImage != null) reticleImage.color = new Color(0, 0, 0, .7f);
+    //    Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+
+    //    if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+    //    {
+    //        currrentInteractable = hit.collider.GetComponent<Interactable>();
+    //        if (currrentInteractable != null && reticleImage != null)
+    //        {
+    //            reticleImage.color = Color.red;
+    //            Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 3, Color.blue);
+
+    //        }
+    //        else
+    //        {
+    //            Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 3, Color.blue);
+    //        }
+    //    }
+
+
+    //}
+    //void HandleInteract()
+    //{
+    //    interactPressed = false;
+    //    if (currrentInteractable == null) return;
+    //    currrentInteractable.Interact(this);
+    //}
+
+    #region PLAYERINPUT
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -75,4 +130,29 @@ public class CCPlayer : MonoBehaviour
         lookInput = context.ReadValue<Vector2>();
     }
 
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed) interactPressed = true;
+    }
+    #endregion
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        //Debug.Log("CC Collided with: " + hit.gameObject.name);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.tag == "PuzzlePiece")
+        {
+            PuzzlePiece++;
+            PiecesCollectedText.text = "Collected: " + PuzzlePiece.ToString();
+            Destroy(other.gameObject);
+
+            if(PuzzlePiece == 5)
+            {
+                PiecesCollectedText.text = "Complete the Puzzle!";
+            }
+        }
+    }
 }
