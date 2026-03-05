@@ -1,14 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DragandDrop : MonoBehaviour
 {
     private GameObject selectedObject;
+    
+
     private void Start()
     {
         
     }
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0)) //0 is identifier for left mouse button
         {
             //assign selected object and pick something up, otherwise set the object down
@@ -38,10 +42,11 @@ public class DragandDrop : MonoBehaviour
 
                 selectedObject = null;
                 Cursor.visible = true;
+
             }
         }
 
-        if(selectedObject != null)
+        if (selectedObject != null)
         {
             Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
@@ -52,7 +57,7 @@ public class DragandDrop : MonoBehaviour
             if (Input.GetMouseButtonDown(1)) //1 is identifier for right mouse button
             {
                 selectedObject.transform.rotation = Quaternion.Euler(new Vector3(
-                    
+
                     selectedObject.transform.rotation.eulerAngles.x,
                     selectedObject.transform.rotation.eulerAngles.y + 90f,
                     selectedObject.transform.rotation.eulerAngles.z));

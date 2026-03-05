@@ -31,6 +31,7 @@ public class CCPlayer : MonoBehaviour
     [Header("Puzzle")]
     private int PuzzlePiece = 0;
     public TextMeshProUGUI PiecesCollectedText;
+    public GameObject box;
 
     
     
@@ -151,7 +152,8 @@ public class CCPlayer : MonoBehaviour
 
             if(PuzzlePiece == 5)
             {
-                PiecesCollectedText.text = "Complete the Puzzle!";
+                PiecesCollectedText.text = "Find the puzzle box and complete the Puzzle!";
+                box.SetActive(true);
             }
         }
     }

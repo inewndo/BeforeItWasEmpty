@@ -15,3 +15,22 @@ Inventory?
 object triggers which tell pieces of story (subtle hints for puzzle pieces)
 
 create emptys in puzzle spots, piece snaps to it with approximation, turn to true - when all true = game complete or smth
+
+ray cast = collide w floor, approzimation rnage, above the empty= snap
+
+//public float height = 2;
+    //public GameObject pivot;
+
+    //Vector3 direction = Vector3.down;
+        //Ray theRay = new Ray(transform.position, transform.TransformDirection(direction * height));
+        //Debug.DrawRay(transform.position, transform.TransformDirection(direction * height));
+
+
+        
+                //if (Physics.Raycast(theRay, out RaycastHit hit, 3f))
+                //{
+                //    if (hit.collider.gameObject == pivot)
+                //    {
+                //        selectedObject.transform.position = new Vector3(pivot.transform.position.x, pivot.transform.position.y, pivot.transform.position.z);
+                //    }
+                //}
