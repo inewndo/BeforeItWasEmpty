@@ -26,15 +26,16 @@ public class CCPlayer : MonoBehaviour
     private GameObject currrentTarget; 
     public Image reticleImage;
     public bool interactPressed;
-    private Interactable currentInteractable;
+    public Interactable currentInteractable;
+    public static event Action<ObjectData> OnDescriptionRequested;
 
     [Header("Puzzle")]
     private int PuzzlePiece = 0;
     public TextMeshProUGUI PiecesCollectedText;
     public GameObject box;
 
-    
-    
+
+
 
     #endregion
 
@@ -137,24 +138,42 @@ public class CCPlayer : MonoBehaviour
     }
     #endregion
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        //Debug.Log("CC Collided with: " + hit.gameObject.name);
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.transform.tag == "PuzzlePiece")
+    //    {
+    //        PuzzlePiece++;
+    //        PiecesCollectedText.text = "Collected: " + PuzzlePiece.ToString();
+    //        Destroy(other.gameObject);
 
-    private void OnTriggerEnter(Collider other)
+    //        if(PuzzlePiece == 5)
+    //        {
+    //            PiecesCollectedText.text = "Find the puzzle box and complete the Puzzle!";
+    //            box.SetActive(true);
+    //        }
+    //    }
+    //}
+
+    public void PuzzlePieces()
     {
-        if(other.transform.tag == "PuzzlePiece")
+        if(interactPressed && gameObject.CompareTag("Interactable"))
         {
             PuzzlePiece++;
             PiecesCollectedText.text = "Collected: " + PuzzlePiece.ToString();
-            Destroy(other.gameObject);
 
-            if(PuzzlePiece == 5)
+
+            if (PuzzlePiece == 5)
             {
                 PiecesCollectedText.text = "Find the puzzle box and complete the Puzzle!";
                 box.SetActive(true);
             }
         }
+        
+
+    }
+
+    public void RequestDescription(ObjectData objectData)
+    {
+        OnDescriptionRequested?.Invoke(objectData);
     }
 }

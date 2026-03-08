@@ -10,7 +10,7 @@ public class ObjectInteractable : Interactable
         {
             Debug.Log("object has no data" + gameObject.name);
         }
-        
-       
+
+        ccplayer.RequestDescription(objectData);
     }
 }
