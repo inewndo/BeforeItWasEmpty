@@ -34,7 +34,7 @@ public class CCPlayer : MonoBehaviour
     public TextMeshProUGUI PiecesCollectedText;
     public GameObject box;
 
-
+    private bool inputDisabled = false;
 
 
     #endregion
@@ -57,9 +57,13 @@ public class CCPlayer : MonoBehaviour
 
     void Update()
     {
-        HandleLook();
-        HandleMovement();
-        CheckInteract();
+        if (!inputDisabled)
+        {
+            HandleLook();
+            HandleMovement();
+            CheckInteract();
+        }
+        
         HandleInteract();
     }
 
@@ -175,5 +179,18 @@ public class CCPlayer : MonoBehaviour
     public void RequestDescription(ObjectData objectData)
     {
         OnDescriptionRequested?.Invoke(objectData);
+    }
+
+    public void DisableInput()
+    {
+        inputDisabled = true;
+        moveInput = Vector2.zero;
+        lookInput = Vector2.zero;
+        reticleImage.color = new Color(0, 0, 0, 0f);
+    }
+
+    public void EnableInput()
+    {
+        inputDisabled = false;
     }
 }

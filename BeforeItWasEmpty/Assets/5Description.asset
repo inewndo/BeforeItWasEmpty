@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6b61d5f28e4af49bf9783d096fb8e5, type: 3}
+  m_Name: 5Description
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectData
+  displayName: 
+  lines:
+  - 'On April 27, 2015, during the fourth game''s production, the numbers 8 and 7
+    could be seen within the code and info on Scott Cawthon''s website, possibly
+    hinting at the Bite of ''87.
+
+    One of Foxy''s eyes in FNaF 4''s teasers contain
+    an "87," implying he did the Bite of ''87.
+
+    Some fans have even managed
+    to translate this into coordinates, pointing to a Virginian pizzeria. This stirred
+    up the fanbase to assume this was connected to the game series. This led to the
+    pizzeria being heavily harassed by phone calls, but Scott responded with a Reddit
+    post, dismissing it as a mere coincidence and discouraging fans from calling
+    any phone numbers they may think are associated with the game. He has since removed
+    the numbers from the site to prevent further harassment to the pizzeria.'
+  nextNode: {fileID: 0}

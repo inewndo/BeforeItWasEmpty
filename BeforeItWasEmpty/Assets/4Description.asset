@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6b61d5f28e4af49bf9783d096fb8e5, type: 3}
+  m_Name: 4Description
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectData
+  displayName: 
+  lines:
+  - On the A.I. settings for the Night 7 in the first game, entering 1/9/8/7 will
+    cause Golden Freddy's kill screen to appear and crash the game. This was added
+    by Scott to halt rumors about entering 1/9/8/7 to acquire a supposed "secret
+    ending" (a rumor originally started because of information about the Bite of
+    '87 coming to light). This works for the Steam version of the game, the 1.1 version
+    and onwards on Desura, and in the mobile version.
+  nextNode: {fileID: 0}

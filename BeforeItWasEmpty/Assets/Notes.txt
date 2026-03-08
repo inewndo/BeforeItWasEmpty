@@ -34,3 +34,5 @@ ray cast = collide w floor, approzimation rnage, above the empty= snap
                 //        selectedObject.transform.position = new Vector3(pivot.transform.position.x, pivot.transform.position.y, pivot.transform.position.z);
                 //    }
                 //}
+
+    fix lock cam and remove reticle - when moving cam away the panel does not go away but the pieces count happens without destroying

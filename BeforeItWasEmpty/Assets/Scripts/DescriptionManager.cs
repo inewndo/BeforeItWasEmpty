@@ -11,13 +11,21 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public GameObject textPannel;
     public TextMeshProUGUI displayName;
     public TextMeshProUGUI lineText;
+    public Transform cameraTransform;
+    private Interactable currrentInteractable;
 
     private int lineIndex;
     private bool isActive;
     private ObjectData currentNode;
+    
 
     private CCPlayer player;
-  
+
+    [Header("Puzzle")]
+    private int PuzzlePiece = 0;
+    public TextMeshProUGUI PiecesCollectedText;
+    public GameObject box;
+
 
     private void Awake()
     {
@@ -44,6 +52,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     void StartDescription(ObjectData objectData)
     {
+        player.DisableInput();
         if(objectData == null)
         {
             Debug.Log("Data is null");
@@ -54,6 +63,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         isActive = true;
         if (textPannel != null) textPannel.SetActive(true);
         ShowLine();
+       
     }
     void ShowLine()
     {
@@ -87,10 +97,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if(currentNode == null)
         {
             EndDescription();
-            //if (gameObject.CompareTag("Interactable"))
-            //{
-            //    Destroy(gameObject);
-            //}
+            
             return;
         }
         lineIndex++;
@@ -106,25 +113,29 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     void EndDescription()
     {
+        textPannel.SetActive(false);
+        Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+        {
+            if(hit.collider.tag == "Interactable")
+            {
+                Destroy(hit.collider.gameObject);
+
+            }
+        }
         isActive = false;
         currentNode = null;
         lineIndex = 0;
-        if (textPannel != null) textPannel.SetActive(false);
-        
-            Destroy(gameObject);
-            Debug.Log("Destroy");
-       
-        
-        //Interact();
-        //CCPlayer.PuzzlePieces();
-        //if (Keyboard.current.spaceKey.wasPressedThisFrame)//gameObject.CompareTag("Interactable") && 
-        //{
-        //    Destroy(currentInteractable);
-        //}
+
+        PuzzlePiece++;
+        PiecesCollectedText.text = "Collected: " + PuzzlePiece.ToString();
+        if (PuzzlePiece == 6)
+        {
+            PiecesCollectedText.text = "Find the puzzle box and complete the Puzzle!";
+            box.SetActive(true);
+        }
+        player.EnableInput();
     }
-    //public override void Interact(CCPlayer ccplayer)
-    //{
-    //    Destroy(gameObject);
-    //    Debug.Log("Destroy");
-    //}
+  
 }
