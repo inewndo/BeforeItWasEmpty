@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BillBoard : MonoBehaviour
 {
-    private BillBoard lookAtCamera;
+    //private BillBoard lookAtCamera;
 
     private void LateUpdate()
     {

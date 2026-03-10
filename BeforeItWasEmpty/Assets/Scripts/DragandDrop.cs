@@ -4,12 +4,7 @@ using UnityEngine;
 public class DragandDrop : MonoBehaviour
 {
     private GameObject selectedObject;
-    
-
-    private void Start()
-    {
-        
-    }
+   
     void Update()
     {
         

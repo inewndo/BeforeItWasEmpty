@@ -116,6 +116,7 @@ public class CCPlayer : MonoBehaviour
                 Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 3, Color.blue);
             }
         }
+        
     }
     void HandleInteract()
     {
@@ -142,22 +143,6 @@ public class CCPlayer : MonoBehaviour
     }
     #endregion
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.transform.tag == "PuzzlePiece")
-    //    {
-    //        PuzzlePiece++;
-    //        PiecesCollectedText.text = "Collected: " + PuzzlePiece.ToString();
-    //        Destroy(other.gameObject);
-
-    //        if(PuzzlePiece == 5)
-    //        {
-    //            PiecesCollectedText.text = "Find the puzzle box and complete the Puzzle!";
-    //            box.SetActive(true);
-    //        }
-    //    }
-    //}
-
     public void PuzzlePieces()
     {
         if(interactPressed && gameObject.CompareTag("Interactable"))
@@ -172,8 +157,6 @@ public class CCPlayer : MonoBehaviour
                 box.SetActive(true);
             }
         }
-        
-
     }
 
     public void RequestDescription(ObjectData objectData)

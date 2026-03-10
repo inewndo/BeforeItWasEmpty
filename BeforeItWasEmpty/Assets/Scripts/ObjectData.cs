@@ -7,15 +7,6 @@ public class ObjectData : ScriptableObject
     [TextArea(3, 10)]
     public string[] lines;
     public ObjectData nextNode;
-    //public GameObject puzzlePiece;
-
-    ////public string displayName;
-    ////public string Description;
-
-    //public void DestroyPiece()
-    //{
-    //    Destroy(puzzlePiece); 
-    //}
 }
 
 
