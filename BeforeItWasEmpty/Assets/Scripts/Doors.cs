@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Doors : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Doors : MonoBehaviour
     private Coroutine currentCoroutine;
 
     //public CCPlayer currentInteractable;
+    public Transform cameraTransform;
 
     void Start()
     {
@@ -25,15 +27,22 @@ public class Doors : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && gameObject.CompareTag("Door"))
+        Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 5f))
         {
-            //make sure there is no ongoing animation; stop any ongoing Coroutine
-            if (currentCoroutine != null) StopCoroutine(currentCoroutine);
-            //start new coroutine to start door opening
-            currentCoroutine = StartCoroutine(ToggleDoor());
+            if (hit.collider.gameObject.tag == "Door")
+            {
+                if (Input.GetKeyDown(KeyCode.Q))
+                { 
+                //make sure there is no ongoing animation; stop any ongoing Coroutine
+                if (currentCoroutine != null) StopCoroutine(currentCoroutine);
+                //start new coroutine to start door opening
+                currentCoroutine = StartCoroutine(ToggleDoor());
+                }
+            }
         }
-
-
     }
    
 

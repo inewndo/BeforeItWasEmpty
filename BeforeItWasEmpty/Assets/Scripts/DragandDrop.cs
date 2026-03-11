@@ -4,6 +4,7 @@ using UnityEngine;
 public class DragandDrop : MonoBehaviour
 {
     private GameObject selectedObject;
+    public Transform[] snappedPiece;
    
     void Update()
     {
@@ -34,8 +35,12 @@ public class DragandDrop : MonoBehaviour
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
                 //drop the piece
                 selectedObject.transform.position = new Vector3(worldPosition.x, 0f, worldPosition.z);
+                //bool dropped;
 
-                selectedObject = null;
+                //if (dropped)
+                OnPieceDropped(selectedObject);
+
+                    selectedObject = null;
                 Cursor.visible = true;
 
             }
@@ -80,5 +85,18 @@ public class DragandDrop : MonoBehaviour
 
         return hit;
 
+    }
+
+    void OnPieceDropped(GameObject piece)
+    {
+        foreach(Transform target in snappedPiece)
+        {
+            if(target.name == piece.name)
+            {
+                //if(piece.transform.position <=)
+                piece.transform.position = target.transform.position;
+                piece.transform.rotation = target.transform.rotation;
+            }
+        }
     }
 }

@@ -36,3 +36,8 @@ ray cast = collide w floor, approzimation rnage, above the empty= snap
                 //}
 
     fix lock cam and remove reticle - when moving cam away the panel does not go away but the pieces count happens without destroying
+    lists
+    array of pieces and array of snap positions
+    ]
+    ublic class ObjectInteractable : Interactable
+    ublic class DoorInteractable : Doors
